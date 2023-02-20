@@ -15,4 +15,6 @@ $('div').click(function () {
 
 // console.log($('.some').closest('.findmeG'));
 
-console.log($('.more').eq(0).siblings());
+// console.log($('.more').eq(0).siblings());
+
+$('button').fadeIn(1800);

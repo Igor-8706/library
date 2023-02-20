@@ -132,6 +132,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./src/js/lib/modules/classes.js");
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handlers */ "./src/js/lib/modules/handlers.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
+/* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/effects */ "./src/js/lib/modules/effects.js");
+
 
 
 
@@ -356,6 +358,69 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggle = function () {
 
 /***/ }),
 
+/***/ "./src/js/lib/modules/effects.js":
+/*!***************************************!*\
+  !*** ./src/js/lib/modules/effects.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+
+// запуск анимации и вычисление времени работы анимации
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateиOverTime = function (duration, callback, finall) {
+  let timeStart;
+  function _animateOverTime(time) {
+    if (!timeStart) {
+      timeStart = time;
+    }
+    let timeElapsed = time - timeStart;
+    let complection = Math.min(timeElapsed / duration, 1);
+    callback(complection);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(_animateOverTime);
+    } else {
+      if (typeof finall === 'function') {
+        finall();
+      }
+    }
+  }
+  return _animateOverTime;
+};
+
+// анимация fadeIn
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (duration, display, finall) {
+  for (let i = 0; i < this.length; i++) {
+    this[i].style.display = display || 'block';
+    const _fadeIn = complection => {
+      this[i].style.opacity = complection;
+    };
+    const ani = this.animateиOverTime(duration, _fadeIn, finall);
+    requestAnimationFrame(ani);
+  }
+  return this;
+};
+
+// анимация fadeOut
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (duration, finall) {
+  for (let i = 0; i < this.length; i++) {
+    const _fadeOut = complection => {
+      this[i].style.opacity = 1 - complection;
+      if (complection === 1) {
+        this[i].style.display = 'none';
+      }
+    };
+    const ani = this.animateиOverTime(duration, _fadeOut, finall);
+    requestAnimationFrame(ani);
+  }
+  return this;
+};
+
+/***/ }),
+
 /***/ "./src/js/lib/modules/handlers.js":
 /*!****************************************!*\
   !*** ./src/js/lib/modules/handlers.js ***!
@@ -428,7 +493,9 @@ $('div').click(function () {
 
 // console.log($('.some').closest('.findmeG'));
 
-console.log($('.more').eq(0).siblings());
+// console.log($('.more').eq(0).siblings());
+
+$('button').fadeIn(1800);
 
 /***/ })
 
