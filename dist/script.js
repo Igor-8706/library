@@ -419,6 +419,32 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dura
   return this;
 };
 
+//  анимация fadeToggle
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (duration, display, finall) {
+  for (let i = 0; i < this.length; i++) {
+    if (window.getComputedStyle(this[i]).display === 'none') {
+      this[i].style.display = display || 'block';
+      const _fadeIn = complection => {
+        this[i].style.opacity = complection;
+      };
+      const ani = this.animateиOverTime(duration, _fadeIn, finall);
+      requestAnimationFrame(ani);
+    } else {
+      for (let i = 0; i < this.length; i++) {
+        const _fadeOut = complection => {
+          this[i].style.opacity = 1 - complection;
+          if (complection === 1) {
+            this[i].style.display = 'none';
+          }
+        };
+        const ani = this.animateиOverTime(duration, _fadeOut, finall);
+        requestAnimationFrame(ani);
+      }
+    }
+  }
+  return this;
+};
+
 /***/ }),
 
 /***/ "./src/js/lib/modules/handlers.js":
@@ -494,13 +520,13 @@ __webpack_require__.r(__webpack_exports__);
 // $('button').fadeIn(1800);
 
 $('#first').on('click', () => {
-  $('div').eq(1).fadeOut(800);
+  $('div').eq(1).fadeToggle(800);
 });
 $('[data-count = "second"]').on('click', () => {
-  $('div').eq(2).fadeOut(800);
+  $('div').eq(2).fadeToggle(800);
 });
 $('button').eq(2).on('click', () => {
-  $('.w-500').fadeOut(800);
+  $('.w-500').fadeToggle(800);
 });
 
 /***/ })

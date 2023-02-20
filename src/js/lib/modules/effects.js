@@ -56,5 +56,35 @@ $.prototype.fadeOut = function (duration, finall) {
         requestAnimationFrame(ani);
     }
     return this;
+};
+
+//  анимация fadeToggle
+$.prototype.fadeToggle = function (duration, display, finall) {
+    for (let i = 0; i < this.length; i++) {
+        if (window.getComputedStyle(this[i]).display === 'none') {
+            this[i].style.display = display || 'block';
+
+            const _fadeIn = (complection) => {
+                this[i].style.opacity = complection;
+            };
+
+            const ani = this.animateиOverTime(duration, _fadeIn, finall);
+            requestAnimationFrame(ani);
+        } else {
+            for (let i = 0; i < this.length; i++) {
+
+                const _fadeOut = (complection) => {
+                    this[i].style.opacity = 1 - complection;
+                    if (complection === 1) {
+                        this[i].style.display = 'none';
+                    }
+                };
+
+                const ani = this.animateиOverTime(duration, _fadeOut, finall);
+                requestAnimationFrame(ani);
+            }
+        }
+    }
+    return this;
 
 };
