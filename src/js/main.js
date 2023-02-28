@@ -22,6 +22,40 @@ $('button').eq(2).on('click', () => {
     $('.w-500').fadeToggle(800);
 });
 
+// создание модального окна
+$('#trigger').click(() => $('#trigger').createModal({
+    text: {
+        title: 'Modal title',
+        body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis sed recusandae natus adipisci veniam culpa quo dicta dolorum fugiat accusantium, ad consequuntur dolorem, aperiam repellendus, quibusdam officiis totam pariatur nemo!'
+    },
+    btns: {
+        count: 3,
+        settings: [
+            [
+                'Close',
+                ['btn-danger', 'mr-10'],
+                true
+            ],
+            [
+                'Save changes',
+                ['btn-success'],
+                false,
+                () => {
+                    alert('Данные сохранены');
+                }
+            ],
+            [
+                'Another button',
+                ['btn-warning','ml-10'],
+                false,
+                () =>{
+                    alert('Hello world');
+                }
+            ]
+        ]
+    }
+}));
+
 // $('.wrap').html(
 //     ` <div class="dropdown">
 //     <button class="btn btn-primary dropdown-toggle" id="drowdownMenuButton">Dropdown button</button>
