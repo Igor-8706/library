@@ -56,6 +56,12 @@ $('#trigger').click(() => $('#trigger').createModal({
     }
 }));
 
+// тестирование методов get и post
+    $().get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => console.log(res));
+
+
+
 // $('.wrap').html(
 //     ` <div class="dropdown">
 //     <button class="btn btn-primary dropdown-toggle" id="drowdownMenuButton">Dropdown button</button>
